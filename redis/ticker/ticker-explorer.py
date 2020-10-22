@@ -12,7 +12,7 @@ from config.role import HOST_ROLE, MASTER_SETINEL_HOST, MASTER_REDIS_MASTER, SLA
 from config.rkeys import r_KEY_TOTALBC
 
 def get_gettotalbc():
-    URL = 'https://explorer.dash.org/chain/Dash/q/totalbc'
+    URL = 'https://explorer.florijncoin.org/chain/Florijncoin/q/totalbc'
     USERAGET = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/602.2.14 (KHTML, like Gecko) Version/10.0.1 Safari/602.2.14'
     headers = {'user-agent': USERAGET}
 
@@ -54,13 +54,13 @@ def check_redis():
 #--------------
 def check_update():
     cur_time = time.time()
-    lastupdate = json.loads(r.get(r_KEY_DASH_BTC_PRICE))['tstamp']
+    lastupdate = json.loads(r.get(r_KEY_FLRN_BTC_PRICE))['tstamp']
 
     if cur_time - lastupdate > 270 and cur_time - lastupdate < 330:
-        twitter.update_status(status='ticker dash has prob -1')
+        twitter.update_status(status='ticker florijncoin has prob -1')
 
     if cur_time - lastupdate > 570 and cur_time - lastupdate < 630:
-        twitter.update_status(status='ticker dash has prob -2')
+        twitter.update_status(status='ticker florijncoin has prob -2')
 
 
 # redis

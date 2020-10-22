@@ -51,8 +51,8 @@ def make_request(URL, CHECK_STRRING):
 def get_poloniex():
     START         = get_espochtime()
     URL           = 'https://poloniex.com/public?command=returnTicker'
-    CHECK_STRRING = 'BTC_DASH'
-    SECON_STRRING = 'USDT_DASH'
+    CHECK_STRRING = 'BTC_FLRN'
+    SECON_STRRING = 'USDT_FLRN'
     exsymbol      = 'poloniex'
     rawjson       = make_request(URL, CHECK_STRRING)
     if rawjson:
@@ -60,16 +60,16 @@ def get_poloniex():
             valbtc = round(float(rawjson[CHECK_STRRING]['last']), 5)
             valusd = round(float(rawjson[SECON_STRRING]['last']), 2)
             if valbtc > 0 and valusd > 0:
-                dashbtc[exsymbol] = valbtc
-                dashusd[exsymbol] = valusd
-                dashbtc_ttook[exsymbol]  = dashusd_ttook[exsymbol] =  get_tooktime(START)
-                dashbtc_tstamp[exsymbol] = dashusd_tstamp[exsymbol] = epoch00
+                florijncoinbtc[exsymbol] = valbtc
+                florijncoinusd[exsymbol] = valusd
+                florijncoinbtc_ttook[exsymbol]  = florijncoinusd_ttook[exsymbol] =  get_tooktime(START)
+                florijncoinbtc_tstamp[exsymbol] = florijncoinusd_tstamp[exsymbol] = epoch00
 
 def get_exmo():
     START         = get_espochtime()
     URL           = 'https://api.exmo.com/v1/ticker/'
-    CHECK_STRRING = 'DASH_BTC'
-    SECON_STRRING = 'DASH_USD'
+    CHECK_STRRING = 'FLRN_BTC'
+    SECON_STRRING = 'FLRN_USD'
     exsymbol      = 'exmo'
     rawjson       = make_request(URL, CHECK_STRRING)
     if rawjson:
@@ -77,15 +77,15 @@ def get_exmo():
             valbtc = round(float(rawjson[CHECK_STRRING]['last_trade']), 5)
             valusd = round(float(rawjson[SECON_STRRING]['last_trade']), 2)
             if valbtc > 0 and valusd > 0:
-                dashbtc[exsymbol] = valbtc
-                dashusd[exsymbol] = valusd
-                dashbtc_ttook[exsymbol]  = dashusd_ttook[exsymbol] =  get_tooktime(START)
-                dashbtc_tstamp[exsymbol] = dashusd_tstamp[exsymbol] = epoch00
+                florijncoinbtc[exsymbol] = valbtc
+                florijncoinusd[exsymbol] = valusd
+                florijncoinbtc_ttook[exsymbol]  = florijncoinusd_ttook[exsymbol] =  get_tooktime(START)
+                florijncoinbtc_tstamp[exsymbol] = florijncoinusd_tstamp[exsymbol] = epoch00
 
 
 def get_bittrex():
     START         = get_espochtime()
-    URL           = 'https://bittrex.com/api/v1.1/public/getticker?market=btc-dash'
+    URL           = 'https://bittrex.com/api/v1.1/public/getticker?market=btc-florijncoin'
     CHECK_STRRING = 'success'
     exsymbol      = 'bittrex'
     rawjson       = make_request(URL, CHECK_STRRING)
@@ -93,9 +93,9 @@ def get_bittrex():
         if rawjson[CHECK_STRRING] == True:
             valbtc = round(float(rawjson['result']['Last']), 5)
             if valbtc > 0:
-                dashbtc[exsymbol] = valbtc
-                dashbtc_ttook[exsymbol] =  get_tooktime(START)
-                dashbtc_tstamp[exsymbol] = epoch00
+                florijncoinbtc[exsymbol] = valbtc
+                florijncoinbtc_ttook[exsymbol] =  get_tooktime(START)
+                florijncoinbtc_tstamp[exsymbol] = epoch00
 
 def get_btcebtc():
     START         = get_espochtime()
@@ -106,9 +106,9 @@ def get_btcebtc():
     if rawjson:
         valbtc = round(float(rawjson[CHECK_STRRING]['last']), 5)
         if valbtc > 0:
-            dashbtc[exsymbol] = valbtc
-            dashbtc_ttook[exsymbol] =  get_tooktime(START)
-            dashbtc_tstamp[exsymbol] = epoch00
+            florijncoinbtc[exsymbol] = valbtc
+            florijncoinbtc_ttook[exsymbol] =  get_tooktime(START)
+            florijncoinbtc_tstamp[exsymbol] = epoch00
 
 
 def get_btceusd():
@@ -120,9 +120,9 @@ def get_btceusd():
     if rawjson:
         valusd = round(float(rawjson[CHECK_STRRING]['last']), 2)
         if valusd > 0:
-            dashusd[exsymbol] = valusd
-            dashusd_ttook[exsymbol] =  get_tooktime(START)
-            dashusd_tstamp[exsymbol] = epoch00
+            florijncoinusd[exsymbol] = valusd
+            florijncoinusd_ttook[exsymbol] =  get_tooktime(START)
+            florijncoinusd_tstamp[exsymbol] = epoch00
 
 
 def get_xbtcebtc():
@@ -135,9 +135,9 @@ def get_xbtcebtc():
         if rawjson[CHECK_STRRING] == 'DSHBTC':
             valbtc = round(float(rawjson['BestBid']), 5)
             if valbtc > 0:
-               dashbtc[exsymbol] = valbtc 
-               dashbtc_ttook[exsymbol] =  get_tooktime(START)
-               dashbtc_tstamp[exsymbol] = epoch00
+               florijncoinbtc[exsymbol] = valbtc 
+               florijncoinbtc_ttook[exsymbol] =  get_tooktime(START)
+               florijncoinbtc_tstamp[exsymbol] = epoch00
 
 def get_xbtceusd():
     START         = get_espochtime()
@@ -149,27 +149,27 @@ def get_xbtceusd():
         if rawjson[CHECK_STRRING] == 'DSHUSD':
             valusd = round(float(rawjson['BestBid']), 2)
             if valusd > 0:
-                dashusd[exsymbol] = valusd
-                dashusd_ttook[exsymbol] =  get_tooktime(START)
-                dashusd_tstamp[exsymbol] = epoch00
+                florijncoinusd[exsymbol] = valusd
+                florijncoinusd_ttook[exsymbol] =  get_tooktime(START)
+                florijncoinusd_tstamp[exsymbol] = epoch00
 
 def get_yobit():
     START         = get_espochtime()
-    URL           = 'https://yobit.net/api/2/dash_btc/ticker'
+    URL           = 'https://yobit.net/api/2/florijncoin_btc/ticker'
     CHECK_STRRING = 'ticker'
     exsymbol      = 'yobit'
     rawjson       = make_request(URL, CHECK_STRRING)
     if rawjson:
         valbtc = round(float(rawjson['ticker']['last']), 5)
         if valbtc > 0:
-            dashbtc[exsymbol] = valbtc    
-            dashbtc_ttook[exsymbol] =  get_tooktime(START)
-            dashbtc_tstamp[exsymbol] = epoch00
+            florijncoinbtc[exsymbol] = valbtc    
+            florijncoinbtc_ttook[exsymbol] =  get_tooktime(START)
+            florijncoinbtc_tstamp[exsymbol] = epoch00
 
 
 def get_livecoinbtc():
     START         = get_espochtime()
-    URL           = 'https://api.livecoin.net/exchange/ticker?currencyPair=DASH/BTC'
+    URL           = 'https://api.livecoin.net/exchange/ticker?currencyPair=FLRN/BTC'
     CHECK_STRRING = 'last'
     exsymbol      = 'livecoin'
     rawjson       = make_request(URL, CHECK_STRRING)
@@ -177,25 +177,25 @@ def get_livecoinbtc():
     if rawjson:
         valbtc = round(float(rawjson[CHECK_STRRING]), 5)
         if valbtc > 0:
-            dashbtc[exsymbol] = valbtc
-            dashbtc_ttook[exsymbol] =  get_tooktime(START)
-            dashbtc_tstamp[exsymbol] = epoch00
+            florijncoinbtc[exsymbol] = valbtc
+            florijncoinbtc_ttook[exsymbol] =  get_tooktime(START)
+            florijncoinbtc_tstamp[exsymbol] = epoch00
 
 def get_livecoinusd():
     START         = get_espochtime()
-    URL           = 'https://api.livecoin.net/exchange/ticker?currencyPair=DASH/USD'
+    URL           = 'https://api.livecoin.net/exchange/ticker?currencyPair=FLRN/USD'
     CHECK_STRRING = 'last'
     exsymbol      = 'livecoin'
     rawjson       = make_request(URL, CHECK_STRRING)
     if rawjson:
         valusd = round(float(rawjson[CHECK_STRRING]), 2)
         if valusd > 0:
-            dashusd[exsymbol] = valusd
-            dashusd_ttook[exsymbol] =  get_tooktime(START)
-            dashusd_tstamp[exsymbol] = epoch00
+            florijncoinusd[exsymbol] = valusd
+            florijncoinusd_ttook[exsymbol] =  get_tooktime(START)
+            florijncoinusd_tstamp[exsymbol] = epoch00
 
 #
-def get_bitfinex_dashbtc():
+def get_bitfinex_florijncoinbtc():
     START         = get_espochtime()
     URL           = 'https://api.bitfinex.com/v1/pubticker/DSHBTC'
     CHECK_STRRING = 'last_price'
@@ -205,11 +205,11 @@ def get_bitfinex_dashbtc():
     if rawjson:
         valbtc = round(float(rawjson[CHECK_STRRING]), 5)
         if valbtc > 0:
-            dashbtc[exsymbol] = valbtc
-            dashbtc_ttook[exsymbol] =  get_tooktime(START)
-            dashbtc_tstamp[exsymbol] = epoch00
+            florijncoinbtc[exsymbol] = valbtc
+            florijncoinbtc_ttook[exsymbol] =  get_tooktime(START)
+            florijncoinbtc_tstamp[exsymbol] = epoch00
 
-def get_bitfinex_dashusd():
+def get_bitfinex_florijncoinusd():
     START         = get_espochtime()
     URL           = 'https://api.bitfinex.com/v1/pubticker/DSHUSD'
     CHECK_STRRING = 'last_price'
@@ -218,38 +218,38 @@ def get_bitfinex_dashusd():
     if rawjson:
         valusd = round(float(rawjson[CHECK_STRRING]), 2)
         if valusd > 0:
-            dashusd[exsymbol] = valusd
-            dashusd_ttook[exsymbol] =  get_tooktime(START)
-            dashusd_tstamp[exsymbol] = epoch00
+            florijncoinusd[exsymbol] = valusd
+            florijncoinusd_ttook[exsymbol] =  get_tooktime(START)
+            florijncoinusd_tstamp[exsymbol] = epoch00
 
 #
-def get_kraken_dashbtc():
+def get_kraken_florijncoinbtc():
     START         = get_espochtime()
-    URL           = 'https://api.kraken.com/0/public/Ticker?pair=DASHXBT'
+    URL           = 'https://api.kraken.com/0/public/Ticker?pair=FLRNXBT'
     CHECK_STRRING = 'result'
     exsymbol      = 'kraken'
     rawjson       = make_request(URL, CHECK_STRRING)
 
     if rawjson:
-        valbtc = round(float(rawjson.get('result').get('DASHXBT').get('b')[0]), 5)
+        valbtc = round(float(rawjson.get('result').get('FLRNXBT').get('b')[0]), 5)
         if valbtc > 0:
-            dashbtc[exsymbol] = valbtc
-            dashbtc_ttook[exsymbol] =  get_tooktime(START)
-            dashbtc_tstamp[exsymbol] = epoch00
+            florijncoinbtc[exsymbol] = valbtc
+            florijncoinbtc_ttook[exsymbol] =  get_tooktime(START)
+            florijncoinbtc_tstamp[exsymbol] = epoch00
 
 
-def get_kraken_dashusd():
+def get_kraken_florijncoinusd():
     START         = get_espochtime()
-    URL           = 'https://api.kraken.com/0/public/Ticker?pair=DASHUSD'
+    URL           = 'https://api.kraken.com/0/public/Ticker?pair=FLRNUSD'
     CHECK_STRRING = 'result'
     exsymbol      = 'kraken'
     rawjson       = make_request(URL, CHECK_STRRING)
     if rawjson:
-        valusd = round(float(rawjson.get('result').get('DASHUSD').get('b')[0]), 2)
+        valusd = round(float(rawjson.get('result').get('FLRNUSD').get('b')[0]), 2)
         if valusd > 0:
-            dashusd[exsymbol] = valusd
-            dashusd_ttook[exsymbol] =  get_tooktime(START)
-            dashusd_tstamp[exsymbol] = epoch00
+            florijncoinusd[exsymbol] = valusd
+            florijncoinusd_ttook[exsymbol] =  get_tooktime(START)
+            florijncoinusd_tstamp[exsymbol] = epoch00
 
 #
 
@@ -281,15 +281,15 @@ def check_redis():
 #--------------
 def check_update():
     cur_time = time.time()
-    lasttstamp = json.loads(r.get(r_KEY_DASH_BTC_PRICE))
+    lasttstamp = json.loads(r.get(r_KEY_FLRN_BTC_PRICE))
     if 'tstamp' in lasttstamp:
         lastupdate = lasttstamp['tstamp']
 
         if cur_time - lastupdate > 270 and cur_time - lastupdate < 330:
-            twitter.update_status(status='ticker dash has prob -1')
+            twitter.update_status(status='ticker florijncoin has prob -1')
 
         if cur_time - lastupdate > 570 and cur_time - lastupdate < 630:
-            twitter.update_status(status='ticker dash has prob -2')
+            twitter.update_status(status='ticker florijncoin has prob -2')
 
 
 #-----------------#
@@ -305,13 +305,13 @@ POOLX = redis.ConnectionPool(host='192.168.10.2', port=16379, db=0)
 rx = redis.StrictRedis(connection_pool=POOLX)
 
 #
-dashbtc = {}
-dashbtc_ttook = {}
-dashbtc_tstamp = {}
+florijncoinbtc = {}
+florijncoinbtc_ttook = {}
+florijncoinbtc_tstamp = {}
 
-dashusd = {}
-dashusd_ttook = {}
-dashusd_tstamp = {}
+florijncoinusd = {}
+florijncoinusd_ttook = {}
+florijncoinusd_tstamp = {}
 
 
 now = datetime.now()
@@ -336,42 +336,42 @@ try:
     get_yobit()
     get_livecoinbtc()
     get_livecoinusd()
-    get_bitfinex_dashbtc()
-    get_bitfinex_dashusd()
-    get_kraken_dashbtc()
-    get_kraken_dashusd()
+    get_bitfinex_florijncoinbtc()
+    get_bitfinex_florijncoinusd()
+    get_kraken_florijncoinbtc()
+    get_kraken_florijncoinusd()
 
 
     #
-    l_dashbtc = []
-    for key in dashbtc:
-        l_dashbtc.append(dashbtc[key])
+    l_florijncoinbtc = []
+    for key in florijncoinbtc:
+        l_florijncoinbtc.append(florijncoinbtc[key])
 
-    l_dashusd = []
-    for key in dashusd:
-        l_dashusd.append(dashusd[key])
+    l_florijncoinusd = []
+    for key in florijncoinusd:
+        l_florijncoinusd.append(florijncoinusd[key])
 
-    if len(l_dashbtc) < 3:
-        dashbtc['avg'] = round(mean(sorted(l_dashbtc)), 5)        
+    if len(l_florijncoinbtc) < 3:
+        florijncoinbtc['avg'] = round(mean(sorted(l_florijncoinbtc)), 5)        
     else:
-        dashbtc['avg'] = round(mean(sorted(l_dashbtc)[1:-1]), 5)
+        florijncoinbtc['avg'] = round(mean(sorted(l_florijncoinbtc)[1:-1]), 5)
        
-    if len(l_dashusd) < 3:
-        dashusd['avg'] = round(mean(sorted(l_dashusd)), 2)
+    if len(l_florijncoinusd) < 3:
+        florijncoinusd['avg'] = round(mean(sorted(l_florijncoinusd)), 2)
     else: 
-        dashusd['avg'] = round(mean(sorted(l_dashusd)[1:-1]), 2)
+        florijncoinusd['avg'] = round(mean(sorted(l_florijncoinusd)[1:-1]), 2)
     
-    dashbtc['tstamp'] = dashusd['tstamp'] = int(time.time())
+    florijncoinbtc['tstamp'] = florijncoinusd['tstamp'] = int(time.time())
 
     # redis
     try:
         pipe = r.pipeline()
-        pipe.set(r_KEY_DASH_BTC_PRICE, json.dumps(dashbtc, sort_keys=True))
-        pipe.set(r_KEY_DASH_USD_PRICE, json.dumps(dashusd, sort_keys=True))
-        pipe.set(r_KEY_DASH_BTC_PRICE_TSTAMP, json.dumps(dashbtc_tstamp, sort_keys=True))
-        pipe.set(r_KEY_DASH_USD_PRICE_TSTAMP, json.dumps(dashusd_tstamp, sort_keys=True))
-        pipe.zadd(r_SS_DASH_BTC_PRICE, epoch00, str(epoch00) + ':' + str(dashbtc['avg']))
-        pipe.zadd(r_SS_DASH_USD_PRICE, epoch00, str(epoch00) + ':' + str(dashusd['avg']))
+        pipe.set(r_KEY_FLRN_BTC_PRICE, json.dumps(florijncoinbtc, sort_keys=True))
+        pipe.set(r_KEY_FLRN_USD_PRICE, json.dumps(florijncoinusd, sort_keys=True))
+        pipe.set(r_KEY_FLRN_BTC_PRICE_TSTAMP, json.dumps(florijncoinbtc_tstamp, sort_keys=True))
+        pipe.set(r_KEY_FLRN_USD_PRICE_TSTAMP, json.dumps(florijncoinusd_tstamp, sort_keys=True))
+        pipe.zadd(r_SS_FLRN_BTC_PRICE, epoch00, str(epoch00) + ':' + str(florijncoinbtc['avg']))
+        pipe.zadd(r_SS_FLRN_USD_PRICE, epoch00, str(epoch00) + ':' + str(florijncoinusd['avg']))
         response = pipe.execute()
 
     except Exception as e:
@@ -381,52 +381,52 @@ try:
     # ISS
     try:
 #        streamer = Streamer(bucket_name=ISS_BUCKET_NAME, bucket_key=ISS_BUCKET_KEY, access_key=ISS_BUCKET_AKEY, buffer_size=50)
-#        streamer.log_object(dashbtc, key_prefix=ISS_PREFIX_DASHBTC, epoch=epoch00)
+#        streamer.log_object(florijncoinbtc, key_prefix=ISS_PREFIX_FLRNBTC, epoch=epoch00)
         datatoship = {
             "bucket_name": ISS_BUCKET_NAME,
-            "key_prefix": ISS_PREFIX_DASHBTC,
+            "key_prefix": ISS_PREFIX_FLRNBTC,
             "epoch": epoch00,
-            "bucket": dashbtc
+            "bucket": florijncoinbtc
         }
         shiptoredis(datatoship)
-#        streamer.log_object(dashusd, key_prefix=ISS_PREFIX_DASHUSD, epoch=epoch00)
+#        streamer.log_object(florijncoinusd, key_prefix=ISS_PREFIX_FLRNUSD, epoch=epoch00)
         datatoship = {
             "bucket_name": ISS_BUCKET_NAME,
-            "key_prefix": ISS_PREFIX_DASHUSD,
+            "key_prefix": ISS_PREFIX_FLRNUSD,
             "epoch": epoch00,
-            "bucket": dashusd
+            "bucket": florijncoinusd
         }
         shiptoredis(datatoship)
-#        streamer.log_object(dashbtc_ttook, key_prefix=ISS_PREFIX_DASHBTC_TT, epoch=epoch00)
+#        streamer.log_object(florijncoinbtc_ttook, key_prefix=ISS_PREFIX_FLRNBTC_TT, epoch=epoch00)
         datatoship = {
             "bucket_name": ISS_BUCKET_NAME,
-            "key_prefix": ISS_PREFIX_DASHBTC_TT,
+            "key_prefix": ISS_PREFIX_FLRNBTC_TT,
             "epoch": epoch00,
-            "bucket": dashbtc_ttook
+            "bucket": florijncoinbtc_ttook
         }
         shiptoredis(datatoship)
-#        streamer.log_object(dashbtc_tstamp, key_prefix=ISS_PREFIX_DASHBTC_TS, epoch=epoch00)
+#        streamer.log_object(florijncoinbtc_tstamp, key_prefix=ISS_PREFIX_FLRNBTC_TS, epoch=epoch00)
         datatoship = {
             "bucket_name": ISS_BUCKET_NAME,
-            "key_prefix": ISS_PREFIX_DASHBTC_TS,
+            "key_prefix": ISS_PREFIX_FLRNBTC_TS,
             "epoch": epoch00,
-            "bucket": dashbtc_tstamp
+            "bucket": florijncoinbtc_tstamp
         }
         shiptoredis(datatoship)
-#        streamer.log_object(dashusd_ttook, key_prefix=ISS_PREFIX_DASHUSD_TT, epoch=epoch00)
+#        streamer.log_object(florijncoinusd_ttook, key_prefix=ISS_PREFIX_FLRNUSD_TT, epoch=epoch00)
         datatoship = {
             "bucket_name": ISS_BUCKET_NAME,
-            "key_prefix": ISS_PREFIX_DASHUSD_TT,
+            "key_prefix": ISS_PREFIX_FLRNUSD_TT,
             "epoch": epoch00,
-            "bucket": dashusd_ttook
+            "bucket": florijncoinusd_ttook
         }
         shiptoredis(datatoship)
-#        streamer.log_object(dashusd_tstamp, key_prefix=ISS_PREFIX_DASHUSD_TS, epoch=epoch00)
+#        streamer.log_object(florijncoinusd_tstamp, key_prefix=ISS_PREFIX_FLRNUSD_TS, epoch=epoch00)
         datatoship = {
             "bucket_name": ISS_BUCKET_NAME,
-            "key_prefix": ISS_PREFIX_DASHUSD_TS,
+            "key_prefix": ISS_PREFIX_FLRNUSD_TS,
             "epoch": epoch00,
-            "bucket": dashusd_tstamp
+            "bucket": florijncoinusd_tstamp
         }
         shiptoredis(datatoship)
 #        streamer.flush()

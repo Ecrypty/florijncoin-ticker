@@ -13,14 +13,14 @@ from config.role import *
 from config.rkeys import *
 
 #-------
-def check_dash_last_5min_entry():
+def check_florijncoin_last_5min_entry():
     try:
-        count = r.zcard(r_SS_DASH_BTC_5MIN_HISTORY)
+        count = r.zcard(r_SS_FLRN_BTC_5MIN_HISTORY)
         if count < 288512:
-            print('dash 5 min history has less than ' + 288512)
+            print('florijncoin 5 min history has less than ' + 288512)
             sys.exit()
 
-        last = r.zrange(r_SS_DASH_BTC_5MIN_HISTORY, -1, -1, withscores=True)[0][1]
+        last = r.zrange(r_SS_FLRN_BTC_5MIN_HISTORY, -1, -1, withscores=True)[0][1]
         if last > 0:
             return last
 
@@ -49,14 +49,14 @@ def timecheck(epoch_lastentry):
     return f_time
 
 
-def get_dash_1min_history(epoch_tocheck):
-    while len(r.zrangebyscore(r_SS_DASH_BTC_PRICE, epoch_tocheck - 300, epoch_tocheck)) < 1: 
+def get_florijncoin_1min_history(epoch_tocheck):
+    while len(r.zrangebyscore(r_SS_FLRN_BTC_PRICE, epoch_tocheck - 300, epoch_tocheck)) < 1: 
         print(epoch_tocheck)
         epoch_tocheck = epoch_tocheck + 300
         if epoch_tocheck > epoch00:
             sys.exit()
 
-    last_5min = r.zrangebyscore(r_SS_DASH_BTC_PRICE, epoch_tocheck - 300, epoch_tocheck, withscores=True)
+    last_5min = r.zrangebyscore(r_SS_FLRN_BTC_PRICE, epoch_tocheck - 300, epoch_tocheck, withscores=True)
 
     listof5minval = []
     for x in last_5min:
@@ -72,7 +72,7 @@ def get_dash_1min_history(epoch_tocheck):
     # redis
     try:
         pipe = r.pipeline()
-        pipe.zadd(r_SS_DASH_BTC_5MIN_HISTORY, epoch_tocheck, str(int(epoch_tocheck)) + ':' + str(Avg))
+        pipe.zadd(r_SS_FLRN_BTC_5MIN_HISTORY, epoch_tocheck, str(int(epoch_tocheck)) + ':' + str(Avg))
         response = pipe.execute()
         return True
 
@@ -125,13 +125,13 @@ except Exception as e:
 #
 try:
     while True:
-        last5minentry = check_dash_last_5min_entry()
+        last5minentry = check_florijncoin_last_5min_entry()
         epoch_tocheck = timecheck(last5minentry)
         print(time.time(), epoch_tocheck, epoch00)
         if epoch_tocheck >= epoch00:
            break 
         else:
-            get_dash_1min_history(epoch_tocheck)
+            get_florijncoin_1min_history(epoch_tocheck)
 
 except Exception as e:
     print(e.args[0])

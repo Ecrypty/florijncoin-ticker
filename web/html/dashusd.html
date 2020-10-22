@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Dash USD Price</title>
+        <title>Florijncoin USD Price</title>
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script type="text/javascript">
@@ -14,7 +14,7 @@ Highcharts.setOptions({
     }
 });
 
-    $.getJSON('/data/v1/dashusd/avg?callback=?', function (data) {
+    $.getJSON('/data/v1/florijncoinusd/avg?callback=?', function (data) {
 
         // Create the chart
         var chart = Highcharts.stockChart('container', {
@@ -53,11 +53,11 @@ Highcharts.setOptions({
             },
 
             title: {
-                text: 'Dash Price'
+                text: 'Florijncoin Price'
             },
 
             series: [{
-                name: 'Dash Price',
+                name: 'Florijncoin Price',
                 data: data,
                 dataGrouping: {
                     enabled: true

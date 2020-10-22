@@ -22,7 +22,7 @@ pp = pprint.PrettyPrinter(indent=4)
 #r.flushdb()
 #sys.exit()
 
-#r.delete(r_SS_DASH_BTC_1H_HISTORY)
+#r.delete(r_SS_FLRN_BTC_1H_HISTORY)
 #sys.exit()
 
 def check_redis():
@@ -55,11 +55,11 @@ check_redis()
 try:
 
 #
-    print('r_KEY_DASH_BTC_PRICE')
-    pp.pprint(r.get(r_KEY_DASH_BTC_PRICE))
+    print('r_KEY_FLRN_BTC_PRICE')
+    pp.pprint(r.get(r_KEY_FLRN_BTC_PRICE))
 
-    print('r_KEY_DASH_USD_PRICE')
-    pp.pprint(r.get(r_KEY_DASH_USD_PRICE))
+    print('r_KEY_FLRN_USD_PRICE')
+    pp.pprint(r.get(r_KEY_FLRN_USD_PRICE))
 
     print('r_KEY_BTC_PRICE')
     pp.pprint(r.get(r_KEY_BTC_PRICE))
@@ -67,29 +67,29 @@ try:
     print('r_KEY_BTC_PRICE_TSTAMP')
     pp.pprint(r.get(r_KEY_BTC_PRICE_TSTAMP))
 
-    print('r_KEY_DASH_BTC_PRICE_TSTAMP')
-    pp.pprint(r.get(r_KEY_DASH_BTC_PRICE_TSTAMP))
+    print('r_KEY_FLRN_BTC_PRICE_TSTAMP')
+    pp.pprint(r.get(r_KEY_FLRN_BTC_PRICE_TSTAMP))
 
-    print('r_KEY_DASH_USD_PRICE_TSTAMP')
-    pp.pprint(r.get(r_KEY_DASH_USD_PRICE_TSTAMP))
+    print('r_KEY_FLRN_USD_PRICE_TSTAMP')
+    pp.pprint(r.get(r_KEY_FLRN_USD_PRICE_TSTAMP))
 
-    print('r_SS_DASH_BTC_PRICE')
-    pp.pprint(r.zrange(r_SS_DASH_BTC_PRICE, -5, -1, withscores=True))
+    print('r_SS_FLRN_BTC_PRICE')
+    pp.pprint(r.zrange(r_SS_FLRN_BTC_PRICE, -5, -1, withscores=True))
 
-    print('r_SS_DASH_USD_PRICE')
-    pp.pprint(r.zrange(r_SS_DASH_USD_PRICE, -5, -1, withscores=True))
+    print('r_SS_FLRN_USD_PRICE')
+    pp.pprint(r.zrange(r_SS_FLRN_USD_PRICE, -5, -1, withscores=True))
 
     print('r_SS_BTC_PRICE')
     pp.pprint(r.zrange(r_SS_BTC_PRICE, -5, -1, withscores=True))
 
-    print('r_SS_DASH_BTC_5MIN_HISTORY')
-    pp.pprint(r.zrange(r_SS_DASH_BTC_5MIN_HISTORY, -5, -1, withscores=True))
+    print('r_SS_FLRN_BTC_5MIN_HISTORY')
+    pp.pprint(r.zrange(r_SS_FLRN_BTC_5MIN_HISTORY, -5, -1, withscores=True))
 
     print('r_SS_BTC_USD_24H_HISTORY')
     pp.pprint(r.zrange(r_SS_BTC_USD_24H_HISTORY, -5, -1, withscores=True))
 
-    print('r_SS_DASH_BTC_1H_HISTORY')
-    pp.pprint(r.zrange(r_SS_DASH_BTC_1H_HISTORY, -5, -1, withscores=True))
+    print('r_SS_FLRN_BTC_1H_HISTORY')
+    pp.pprint(r.zrange(r_SS_FLRN_BTC_1H_HISTORY, -5, -1, withscores=True))
 
     print('r_KEY_TOTALBC')
     pp.pprint(r.get(r_KEY_TOTALBC))
@@ -97,8 +97,8 @@ try:
     print('r_KEY_TICKER')
     pp.pprint(r.get(r_KEY_TICKER))
 
-    #print('r_KEY_DASH_USD_AVG_HISTORY')
-    #pp.pprint(r.get(r_KEY_DASH_USD_AVG_HISTORY))
+    #print('r_KEY_FLRN_USD_AVG_HISTORY')
+    #pp.pprint(r.get(r_KEY_FLRN_USD_AVG_HISTORY))
     
 except Exception as e:
     print(e.args[0])

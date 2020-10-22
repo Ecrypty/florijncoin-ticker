@@ -12,16 +12,16 @@ from statistics import mean
 from config.role import *
 from config.rkeys import *
 
-def check_dash_last_1h_entry():
+def check_florijncoin_last_1h_entry():
     try:
-        count = r.zcard(r_SS_DASH_BTC_1H_HISTORY)
+        count = r.zcard(r_SS_FLRN_BTC_1H_HISTORY)
         if count == 0:
             # then check first entry of 5 min history
-            last = r.zrange(r_SS_DASH_BTC_5MIN_HISTORY, 0, 0, withscores=True)[0][1]
+            last = r.zrange(r_SS_FLRN_BTC_5MIN_HISTORY, 0, 0, withscores=True)[0][1]
             return last
 
         else:
-            last = r.zrange(r_SS_DASH_BTC_1H_HISTORY, -1, -1, withscores=True)[0][1]
+            last = r.zrange(r_SS_FLRN_BTC_1H_HISTORY, -1, -1, withscores=True)[0][1]
             if last > 0:
                 return last
 
@@ -48,11 +48,11 @@ def timecheck(epoch_lastentry):
 
     return f_time
 
-def get_dash_5min_history(epoch_tocheck):
-    while len(r.zrangebyscore(r_SS_DASH_BTC_5MIN_HISTORY, epoch_tocheck, epoch_tocheck + 3600)) < 1:
+def get_florijncoin_5min_history(epoch_tocheck):
+    while len(r.zrangebyscore(r_SS_FLRN_BTC_5MIN_HISTORY, epoch_tocheck, epoch_tocheck + 3600)) < 1:
         epoch_tocheck = epoch_tocheck + 3600
 
-    last_1h = r.zrangebyscore(r_SS_DASH_BTC_5MIN_HISTORY, epoch_tocheck, epoch_tocheck + 3600, withscores=True)
+    last_1h = r.zrangebyscore(r_SS_FLRN_BTC_5MIN_HISTORY, epoch_tocheck, epoch_tocheck + 3600, withscores=True)
    
     list_1hval = []
     for x in last_1h:
@@ -74,7 +74,7 @@ def get_dash_5min_history(epoch_tocheck):
     # redis
     try:
         pipe = r.pipeline()
-        pipe.zadd(r_SS_DASH_BTC_1H_HISTORY, epoch_tocheck + 3600, str(int(epoch_tocheck + 3600)) + ':' + str(minval) + ':' + str(Avg) + ':' + str(maxval)) 
+        pipe.zadd(r_SS_FLRN_BTC_1H_HISTORY, epoch_tocheck + 3600, str(int(epoch_tocheck + 3600)) + ':' + str(minval) + ':' + str(Avg) + ':' + str(maxval)) 
         response = pipe.execute()
         return True
 
@@ -126,13 +126,13 @@ except Exception as e:
 
 try:
     while True:
-        last1hentry   = check_dash_last_1h_entry()
+        last1hentry   = check_florijncoin_last_1h_entry()
         epoch_tocheck = timecheck(last1hentry)
 
         if epoch_tocheck >= (epoch00 - (now.minute * 60)):
             break
         else:
-            get_dash_5min_history(epoch_tocheck)
+            get_florijncoin_5min_history(epoch_tocheck)
 
 except Exception as e:
     print(e.args[0])

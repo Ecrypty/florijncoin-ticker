@@ -11,9 +11,9 @@ from statistics import mean
 from config.role import *
 from config.rkeys import *
 
-# r_KEY_DASH_BTC_AVG_HISTORY
+# r_KEY_FLRN_BTC_AVG_HISTORY
 
-# r_KEY_DASH_USD_AVG_HISTORY
+# r_KEY_FLRN_USD_AVG_HISTORY
 # r_SS_BTC_USD_24H_HISTORY
 
 
@@ -22,14 +22,14 @@ def get_btc_period():
     start = int(r.zrange(r_SS_BTC_USD_24H_HISTORY, 0, 0, withscores=True)[0][1])
     return start, stop
 
-def get_dash_btc_avg_history():
+def get_florijncoin_btc_avg_history():
 
     list_avg = []
 
-    result = json.loads(r.get(r_KEY_DASH_BTC_AVG_HISTORY))
+    result = json.loads(r.get(r_KEY_FLRN_BTC_AVG_HISTORY))
     for x in result:
         datestamp = int(x[0] /1000)
-        dashavgbtc    = x[1]
+        florijncoinavgbtc    = x[1]
         if datestamp >= btc_history_start and datestamp <= btc_history_stop:
             btcusd_price = r.zrangebyscore(r_SS_BTC_USD_24H_HISTORY, datestamp - 172800, datestamp + 86400, withscores=False)
             tempval = []
@@ -49,11 +49,11 @@ def get_dash_btc_avg_history():
 
             btcavgval = round(mean(sorted(tempval)), 2)
 
-        dashavgusd = round(btcavgval*dashavgbtc, 2)
-        list_avg.append([int(str(datestamp) + '000'), float(dashavgusd)])
+        florijncoinavgusd = round(btcavgval*florijncoinavgbtc, 2)
+        list_avg.append([int(str(datestamp) + '000'), float(florijncoinavgusd)])
 
     pipe = r.pipeline()
-    pipe.set(r_KEY_DASH_USD_AVG_HISTORY, list_avg)
+    pipe.set(r_KEY_FLRN_USD_AVG_HISTORY, list_avg)
     response = pipe.execute()
 
 
@@ -100,7 +100,7 @@ except Exception as e:
 
 try:
     btc_history_start, btc_history_stop = get_btc_period()
-    get_dash_btc_avg_history()
+    get_florijncoin_btc_avg_history()
 
 except Exception as e:
     print(e.args[0])

@@ -13,7 +13,7 @@ var draw= function(hashrate, doarate) {
         height: 520,
     },
     exporting: { enabled: false },
-    title: { text: 'Dash price' },
+    title: { text: 'Florijncoin price' },
     rangeSelector: {
         buttons: [{
             type: 'hour',

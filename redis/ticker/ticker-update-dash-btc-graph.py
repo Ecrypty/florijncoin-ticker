@@ -18,9 +18,9 @@ def get_data():
     list_avg = []
     list_max = []
 
-    epochfirst = r.zrange(r_SS_DASH_BTC_1H_HISTORY, 0, 0, withscores=True)[0][1]
+    epochfirst = r.zrange(r_SS_FLRN_BTC_1H_HISTORY, 0, 0, withscores=True)[0][1]
 
-    data1h = r.zrangebyscore(r_SS_DASH_BTC_1H_HISTORY, epochfirst, epoch5minlast) 
+    data1h = r.zrangebyscore(r_SS_FLRN_BTC_1H_HISTORY, epochfirst, epoch5minlast) 
     for x in data1h:
         tstampx, minvalx, avgvalx, maxvalx = x.decode("utf-8").split(':')
 #        list_min.append([int(tstampx + '000'), float(minvalx)])
@@ -28,20 +28,20 @@ def get_data():
 #        list_max.append([int(tstampx + '000'), float(maxvalx)])
         list_avg.append([int(tstampx + '000'), float(maxvalx)])
 
-    data5m = r.zrangebyscore(r_SS_DASH_BTC_5MIN_HISTORY, epoch5minlast, epoch1minlast)
+    data5m = r.zrangebyscore(r_SS_FLRN_BTC_5MIN_HISTORY, epoch5minlast, epoch1minlast)
     for y in data5m:
         tstampy, avgvaly = y.decode("utf-8").split(':')
         list_avg.append([int(tstampy + '000'), float(avgvaly)])
 
-    data1m = r.zrangebyscore(r_SS_DASH_BTC_PRICE, epoch1minlast, epoch00)
+    data1m = r.zrangebyscore(r_SS_FLRN_BTC_PRICE, epoch1minlast, epoch00)
     for z in data1m:
         tstampz, avgvalz = z.decode("utf-8").split(':')
         list_avg.append([int(tstampz + '000'), float(avgvalz)])
 
     pipe = r.pipeline()
-    pipe.set(r_KEY_DASH_BTC_AVG_HISTORY, list_avg)
-#    pipe.set(r_KEY_DASH_BTC_MIN_HISTORY, list_min)
-#    pipe.set(r_KEY_DASH_BTC_MAX_HISTORY, list_max)
+    pipe.set(r_KEY_FLRN_BTC_AVG_HISTORY, list_avg)
+#    pipe.set(r_KEY_FLRN_BTC_MIN_HISTORY, list_min)
+#    pipe.set(r_KEY_FLRN_BTC_MAX_HISTORY, list_max)
     response = pipe.execute()
 
 def make_ticker():
@@ -49,10 +49,10 @@ def make_ticker():
     ticker['totalbc']       = int(r.get(r_KEY_TOTALBC))
     ticker['btcusd']        = json.loads(r.get(r_KEY_BTC_PRICE))
     ticker['btcusd_stamp']  = json.loads(r.get(r_KEY_BTC_PRICE_TSTAMP))
-    ticker['dashbtc']       = json.loads(r.get(r_KEY_DASH_BTC_PRICE))
-    ticker['dashbtc_stamp'] = json.loads(r.get(r_KEY_DASH_BTC_PRICE_TSTAMP))
-    ticker['dashusd']       = json.loads(r.get(r_KEY_DASH_USD_PRICE))
-    ticker['dashusd_stamp'] = json.loads(r.get(r_KEY_DASH_USD_PRICE_TSTAMP))
+    ticker['florijncoinbtc']       = json.loads(r.get(r_KEY_FLRN_BTC_PRICE))
+    ticker['florijncoinbtc_stamp'] = json.loads(r.get(r_KEY_FLRN_BTC_PRICE_TSTAMP))
+    ticker['florijncoinusd']       = json.loads(r.get(r_KEY_FLRN_USD_PRICE))
+    ticker['florijncoinusd_stamp'] = json.loads(r.get(r_KEY_FLRN_USD_PRICE_TSTAMP))
 #
     pipe = r.pipeline()
     pipe.set(r_KEY_TICKER, json.dumps(ticker))

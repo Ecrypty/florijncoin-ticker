@@ -26,14 +26,14 @@ var fetchGraph= function(interval) {
   var graph_hashrate= [], graph_doa_hashrate= [];
 
 
-  $.getJSON('/data/v1/dashusd/avg?callback=?', function (data) {
+  $.getJSON('/data/v1/florijncoinusd/avg?callback=?', function (data) {
     $.each(data, function(key, value) {
       el= []; el.push(parseInt(value[0]),
         parseFloat(value[1]));
       graph_hashrate.push(el);
     });
     graph_hashrate.sort();
-    $.getJSON('/data/v1/dashbtc/avg?callback=?', function (data) {
+    $.getJSON('/data/v1/florijncoinbtc/avg?callback=?', function (data) {
       $.each(data, function(key, value) {
         el= []; el.push(parseInt(value[0]),
           parseFloat(value[1]));

@@ -46,14 +46,14 @@ make install
                 redis_pass 127.0.0.1:16379;
         }
 
-        location = /api/v1/dashusd {
+        location = /api/v1/florijncoinusd {
                 default_type application/json;
-                set $redis_key 'TICKER:key_dash_usd_price';
+                set $redis_key 'TICKER:key_florijncoin_usd_price';
                 redis_pass 127.0.0.1:16379;
         }
-        location = /api/v1/dashbtc {
+        location = /api/v1/florijncoinbtc {
                 default_type application/json;
-                set $redis_key 'TICKER:key_dash_btc_price';
+                set $redis_key 'TICKER:key_florijncoin_btc_price';
                 redis_pass 127.0.0.1:16379;
         }
  ```
@@ -178,7 +178,7 @@ slaveof 192.168.10.1 6379
 ```
 
 - cron 
- https://github.com/chaeplin/dash-price
+ https://github.com/chaeplin/florijncoin-price
 
 
 - backup
@@ -192,6 +192,6 @@ rdiff-backup --preserve-numerical-ids --no-file-statistics /var/lib/redis /home/
  ```
 wget https://dl.eff.org/certbot-auto
 chmod a+x certbot-auto
-./certbot-auto certonly --webroot -w /usr/local/nginx/html/ -d test.stats.dash.org
+./certbot-auto certonly --webroot -w /usr/local/nginx/html/ -d test.stats.florijncoin.org
 ./certbot-auto renew --dry-run
 

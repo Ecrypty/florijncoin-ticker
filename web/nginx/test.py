@@ -14,10 +14,10 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 # --- change 
 # rpc
-rpcuser     = 'dashmnb'
+rpcuser     = 'florijncoinmnb'
 rpcpassword = 'iamok'
 #rpcbindip   = '163.44.167.237'
-rpcbindip   = 'test.stats.dash.org'
+rpcbindip   = 'test.stats.florijncoin.org'
 rpcport     = 587
 
 
