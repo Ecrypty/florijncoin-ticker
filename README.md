@@ -1,3 +1,3 @@
-config and scripts for dash ticker
+config and scripts for florijncoin ticker
 ===================================
 
